@@ -111,6 +111,20 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         String location = SunshinePreferences.getPreferredWeatherLocation(this);
         new FetchWeatherTask().execute(location);
     }
+    private void loadMap(){
+        String address="Gateway of India";
+
+        Uri.Builder builder=new Uri.Builder();
+        builder.scheme("geo")
+                .path("0,0")
+                .appendQueryParameter("q",address);
+
+        Intent i=new Intent(Intent.ACTION_VIEW);
+        i.setData(builder.build() );
+        if(i.resolveActivity(getPackageManager()) != null){
+            startActivity(i);
+        }
+    }
 
     /**
      * This method is overridden by our MainActivity class in order to handle RecyclerView item
@@ -222,7 +236,10 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         }
 
         // TODO (2) Launch the map when the map menu item is clicked
-
+        if(id == R.id.action_open_map){
+            loadMap();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
