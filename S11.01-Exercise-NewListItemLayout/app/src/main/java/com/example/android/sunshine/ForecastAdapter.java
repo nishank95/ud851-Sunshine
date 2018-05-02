@@ -22,6 +22,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.sunshine.utilities.SunshineDateUtils;
@@ -129,7 +130,11 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
 
         String weatherSummary = dateString + " - " + description + " - " + highAndLowTemperature;
 
-        forecastAdapterViewHolder.weatherSummary.setText(weatherSummary);
+        forecastAdapterViewHolder.weatherDate.setText(dateString);
+        forecastAdapterViewHolder.weatherCondition.setText(description);
+        forecastAdapterViewHolder.weatherTempMax.setText((int) highInCelsius);
+        forecastAdapterViewHolder.weatherTempMin.setText((int) lowInCelsius);
+
     }
 
     /**
@@ -164,16 +169,24 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
      */
     class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 //      TODO (4) Replace the weatherSummary TextView with individual weather detail TextViews
-        final TextView weatherSummary;
+        final TextView weatherDate;
+        final TextView weatherCondition;
+        final TextView weatherTempMax;
+        final TextView weatherTempMin;
+
 
 //      TODO (5) Add an ImageView for the weather icon
+        final ImageView weatherIcon;
 
         ForecastAdapterViewHolder(View view) {
             super(view);
 
 //          TODO (6) Get references to all new views and delete this line
-            weatherSummary = (TextView) view.findViewById(R.id.tv_weather_data);
-
+            weatherDate = (TextView) view.findViewById(R.id.tv_weather_date);
+            weatherCondition = (TextView) view.findViewById(R.id.tv_weather_condition);
+            weatherTempMax = (TextView) view.findViewById(R.id.tv_weather_temp_max);
+            weatherTempMin = (TextView) view.findViewById(R.id.tv_weather_temp_min);
+            weatherIcon = (ImageView) view.findViewById(R.id.iv_Weather_icon);
             view.setOnClickListener(this);
         }
 
